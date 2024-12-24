@@ -44,7 +44,7 @@ function f_draw_word(russian_word = main_input.value) {
   //генерируй размеры картинки в зависимости от длины слова
   main_canvas.width = cell_size_xy[0] * arr_pairs.length;
   main_canvas.height = cell_size_xy[1];
-  var main_context = main_canvas.getContext('2d');
+  var main_context = main_canvas.getContext('2d',{willReadFrequently:false});
 
   //вставляй символ на нужно место на холсте, все символы имеют одинаковый размер
   function f_crop(text_link, i_char_position) {
@@ -55,13 +55,13 @@ function f_draw_word(russian_word = main_input.value) {
       var X = i_char_position * cell_size_xy[0];
       //параметры для вставки изображения (все клетки-символы имеют одинаковый размер)
       main_context.drawImage(imageObj, X, 0);
-
-      //main_context.drawImage(imageObj, 0, 0)
     
-      var dataImg = main_context.getImageData(0, 0, imageObj.width, imageObj.height);
+      var dataImg = main_context.getImageData(X, 0, ...cell_size_xy);
       var pix = dataImg.data;
+      
       for (let i = 0; i < pix.length; i += 4) {
-        pix[i + 0] = 255 - pix[i];
+        break;
+        pix[i + 0] = 255 - pix[i + 0];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
         pix[i + 3] = 255;
