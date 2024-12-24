@@ -55,17 +55,33 @@ function f_draw_word(russian_word = main_input.value) {
       var X = i_char_position * cell_size_xy[0];
       //параметры для вставки изображения (все клетки-символы имеют одинаковый размер)
       main_context.drawImage(imageObj, X, 0);
+
+      //main_context.drawImage(imageObj, 0, 0)
+    
+      var dataImg = main_context.getImageData(0, 0, imageObj.width, imageObj.height);
+      var pix = dataImg.data;
+      for (let i = 0; i < pix.length; i += 4) {
+        pix[i + 0] = 255 - pix[i];
+        pix[i + 1] = 255 - pix[i + 1];
+        pix[i + 2] = 255 - pix[i + 2];
+        pix[i + 3] = 255;
+      }
+      main_context.putImageData(dataImg, X, 0);
     };
     imageObj.src = text_link;
   }
 
   //вставляй символы по одному слева направо
-  for (var i = 0; i < arr_paths.length; i++)
+  for (let i = 0; i < arr_paths.length; i++)
     f_crop(arr_paths[i], i);
+
 }
 
 //нарисуй пример: слово "слово"
 f_draw_word();
+
+
+
 //события изменения текста в строке ввода
 main_input.oninput = (function () { f_draw_word() });
 
