@@ -60,8 +60,8 @@ function f_draw_word(russian_word = main_input.value) {
       var pix = dataImg.data;
       
       for (let i = 0; i < pix.length; i += 4) {
-        break;
-        pix[i + 0] = 255 - pix[i + 0];
+        //break;
+        pix[i + 0] = pix[i + 0];
         pix[i + 1] = 255 - pix[i + 1];
         pix[i + 2] = 255 - pix[i + 2];
         pix[i + 3] = 255;
