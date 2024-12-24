@@ -6,8 +6,6 @@ body {
 
 canvas {
     background-color: none;
-
-    margin-left: 1em;
 }
 
 input {
@@ -15,8 +13,11 @@ input {
     width: 95%;
     font-family: monospace;
     font-size: 1.5em;
-    height: 1.5em;
-    margin-left: 1em;
+}
+
+button {
+    font-size: 1.0em;
+    height: 1.3em;
 }
 
 p {

@@ -2,6 +2,7 @@
 var main_canvas = window.document.getElementById('idCanvas');
 //строка для ввода (русские буквы, возможен один знак равно: для оборотней)
 var main_input = window.document.getElementById('idInput');
+var main_button_copy = window.document.getElementById('idButtonCopy');
 
 //размеры квадратных клеток (где все символы перевёртыши)
 var cell_size_xy = [64,64];
@@ -92,11 +93,11 @@ function f_draw_word(russian_word = main_input.value) {
   //вставляй символы по одному слева направо
   for (var i = 0; i < arr_paths.length; i++)
     f_crop(arr_paths[i], i);
-
-  copyCanvasContentsToClipboard();
 }
 
 //нарисуй пример: слово "слово"
 f_draw_word();
 //события изменения текста в строке ввода
 main_input.oninput = (function () {f_draw_word()});
+
+main_button_copy.onclick = (function () {copyCanvasContentsToClipboard()});
