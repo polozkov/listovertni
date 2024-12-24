@@ -1,0 +1,24 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+canvas {
+    background-color: none;
+
+    margin-left: 1em;
+}
+
+input {
+    margin-top: 1em;
+    width: 95%;
+    font-family: monospace;
+    font-size: 2em;
+    margin-left: 1em;
+}
+
+p {
+    font-size: 1.5em;
+    margin-left: 1em;
+}
