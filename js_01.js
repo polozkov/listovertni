@@ -16,6 +16,37 @@ function f_clear(s) {
   return s_new;
 }
 
+// Async/await method replacing toBlob() callback
+async function getBlobFromCanvas(canvas) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+      } else {
+        reject(new Error("Canvas toBlob failed"));
+      }
+    });
+  });
+}
+
+async function copyCanvasContentsToClipboard() {
+  if (ClipboardItem.supports("image/png")) {
+    // Copy canvas to blob
+    try {
+      const blob = await getBlobFromCanvas(main_canvas);
+      // Create ClipboardItem with blob and it's type, and add to an array
+      const data = [new ClipboardItem({ [blob.type]: blob })];
+      // Write the data to the clipboard
+      await navigator.clipboard.write(data);
+      console.log("Copied");
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    console.log("image/png is not supported");
+  }
+}
+
 //риссуй русское слово листовертень
 //из книги Калинина "Видение Тайны, издательство Кучково Поле, 2012 год"
 function f_draw_word(russian_word = main_input.value) {
@@ -61,6 +92,8 @@ function f_draw_word(russian_word = main_input.value) {
   //вставляй символы по одному слева направо
   for (var i = 0; i < arr_paths.length; i++)
     f_crop(arr_paths[i], i);
+
+  copyCanvasContentsToClipboard();
 }
 
 //нарисуй пример: слово "слово"
