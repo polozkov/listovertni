@@ -57,7 +57,7 @@ G.f_draw_word = function (russian_word = G.main_input.value) {
   //генерируй размеры картинки в зависимости от длины слова
   G.main_canvas.width = G.cell_size_xy[0] * arr_pairs.length;
   G.main_canvas.height = G.cell_size_xy[1];
-  let local_context = G.main_canvas.getContext('2d',{willReadFrequently:false});
+  let local_context = G.main_canvas.getContext('2d',{willReadFrequently:true});
 
   //вставляй символ на нужно место на холсте, все символы имеют одинаковый размер
   function f_crop(text_link, i_char_position) {
@@ -77,7 +77,7 @@ G.f_draw_word = function (russian_word = G.main_input.value) {
         //pix[i + 1] = 255 - pix[i + 1];
         //pix[i + 2] = 255 - pix[i + 2];
         //альфа-канал - полупрозрачность (можно и без этой строки, тогда будет белый фон)
-        pix[i + 3] = 255 - Math.round((pix[i + 0] + pix[i + 1] + pix[i + 2]) / 3);
+        //pix[i + 3] = 255 - Math.round((pix[i + 0] + pix[i + 1] + pix[i + 2]) / 3);
       }
       local_context.putImageData(dataImg, X, 0);
     };
