@@ -15,14 +15,17 @@ G.LETTERS_33_EQ = "=АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬ
 G.f_clear = function(s = G.main_input.value) {
   s = s.toUpperCase();
   let s_new = ""
+  //сколько знаков равно обнаружено
   let n_equals = 0;
   for (let i = 0; i < s.length; i++) {
     if ("=".includes(s[i])) {
       n_equals += 1;
+      //если есть второй знак равно, то выходи и верни строку
       if (n_equals >= 2) {
         return s_new;
       }
     }
+    //добавь русскую букву или один знак равно
     if (G.LETTERS_33_EQ.includes(s[i]))
       s_new += s[i];
   }
@@ -77,7 +80,7 @@ G.f_draw_word = function (russian_word = G.main_input.value) {
         //pix[i + 1] = 255 - pix[i + 1];
         //pix[i + 2] = 255 - pix[i + 2];
         //альфа-канал - полупрозрачность (можно и без этой строки, тогда будет белый фон)
-        pix[i+3] = 255 - pix[i+1]; //альфа конал по зелёному цвету
+        pix[i+3] = 255 - pix[i+1]; //альфа канал по зелёному цвету
         //pix[i + 3] = 255 - Math.round((pix[i + 0] + pix[i + 1] + pix[i + 2]) / 3);
       }
       local_context.putImageData(dataImg, X, 0);
