@@ -38,11 +38,10 @@ G.f_draw_word = function (russian_word = G.main_input.value) {
   //только заглавные буквы
   let s = russian_word.toUpperCase();
 
+  //по умолчанию картинка непрозрачная
   let is_transparant = false;
-  if ((s.length) && (s[-1] == "-")) {
-    is_transparant = true;
-    s = s.slice(0, -1);
-  }
+  //но если последний символ это "-", то добавь прозрачности
+  if ((s.length) && (s[s.length - 1] == "-")) {is_transparant = true;}
 
   //убери все посторонние символы
   s = G.f_clear();
@@ -84,6 +83,7 @@ G.f_draw_word = function (russian_word = G.main_input.value) {
       let dataImg = local_context.getImageData(X, 0, ...G.cell_size_xy);
       let pix = dataImg.data;
 
+      //console.log("прозрачность is_transparant =", is_transparant);
       if (is_transparant) {
         for (let i = 0; i < pix.length; i += 4) {
           //pix[i + 0] = 255 - pix[i + 0];
