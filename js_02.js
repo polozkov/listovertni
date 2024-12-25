@@ -22,8 +22,8 @@ G.f_save = function () {
 
   const s = G.main_input.value;
   if (G.f_clear(s).length == 0) {return}
-
   const str_is_transparant = (s[s.length - 1] == "-") ? '_прозрачная_картинка.png' : '.png';
+  console.log(s, str_is_transparant);
   //строка - имя сохраняемого файла
   link.download = ('png_' + G.f_clear() + str_is_transparant).replace("=", "_");
   //временно создай ссылку
