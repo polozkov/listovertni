@@ -8,6 +8,7 @@ G.main_input = window.document.getElementById('idInput');
 //размеры квадратных клеток (где все символы перевёртыши)
 G.cell_size_xy = [64, 64];
 G.LETTERS_31_EQ = "=АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЭЮЯ";
+G.LETTERS_33_EQ = "=АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
 //очиcть  строку от посторонних символов (кроме равно и русских букв, кроме "Ё" и "Ь")
 G.f_clear = function(s = G.main_input.value) {
@@ -21,7 +22,7 @@ G.f_clear = function(s = G.main_input.value) {
         return s_new;
       }
     }
-    if (G.LETTERS_31_EQ.includes(s[i]))
+    if (G.LETTERS_33_EQ.includes(s[i]))
       s_new += s[i];
   }
   return s_new;
@@ -32,10 +33,11 @@ G.f_clear = function(s = G.main_input.value) {
 G.f_draw_word = function (russian_word = G.main_input.value) {
   //только заглавные буквы
   let s = russian_word.toUpperCase();
-  //без Ё и мягкого знака (используй Е и Ъ)
-  s = s.replaceAll("Ё", "Е").replaceAll("Ь", "Ъ");
   //убери все посторонние символы
   s = G.f_clear();
+  //без Ё и мягкого знака (используй Е и Ъ)
+  s = s.replaceAll("Ё", "Е").replaceAll("Ь", "Ъ");
+
 
   //если есть равенство, то рисуй слово-оборотень
   let s2 = s.split("=");
